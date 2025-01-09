@@ -13,7 +13,7 @@ namespace Engine
 		AssetManager();
 		~AssetManager();
 
-		void addTexture(int id, const string& filepath, bool repeated = false) {}
+		void addTexture(int id, const string& filepath, bool repeated = false);
 		void addFont(int id, const string& filepath);
 
 		const sf::Texture& getTexture(int id) const;

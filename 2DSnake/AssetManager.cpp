@@ -20,7 +20,7 @@ void Engine::AssetManager::addTexture(int id, const string& filepath, bool repea
 void Engine::AssetManager::addFont(int id, const string& filepath) {
 	unique_ptr<sf::Font> font = make_unique<sf::Font>();
 
-	if (font->loadFromFile(filepath)) {
+	if (font->openFromFile(filepath)) {
 		_font[id] = move(font);
 	}
 }
