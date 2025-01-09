@@ -136,6 +136,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="2DSnake.cpp" />
+    <ClCompile Include="StateManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
