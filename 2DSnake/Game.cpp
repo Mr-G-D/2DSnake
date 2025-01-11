@@ -8,17 +8,26 @@ void Game::run() {
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
 
+	sf::Clock clock;
+	sf::Time timeSinceLastFrame = sf::Time::Zero;
+
 	while (_construct->renderWindow->isOpen())
 	{
-		while (const std::optional event = _construct->renderWindow->pollEvent())
+		timeSinceLastFrame += clock.restart();
+		while (timeSinceLastFrame >= _timePerFrame)
 		{
-			if (event->is<sf::Event::Closed>())
-				_construct->renderWindow->close();
-		}
+			timeSinceLastFrame -= _timePerFrame;
+			while (const optional event = _construct->renderWindow->pollEvent())
+			{
+				if (event->is<sf::Event::Closed>())
+					_construct->renderWindow->close();
+			}
 
-		_construct->renderWindow->clear();
-		_construct->renderWindow->draw(shape);
-		_construct->renderWindow->display();
+			_construct->renderWindow->clear();
+			_construct->renderWindow->draw(shape);
+			_construct->renderWindow->display();
+
+		}
 	}
 }
 

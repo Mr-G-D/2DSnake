@@ -26,7 +26,7 @@ class Game
 
 private:
 	shared_ptr<Construct> _construct;
-	const sf::Time _time_per_second = sf::seconds(1.f / 60.f);
+	const sf::Time _timePerFrame = sf::seconds(1.f / 60.f);
 
 public:
 	Game();
