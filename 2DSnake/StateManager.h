@@ -18,12 +18,12 @@ namespace Engine {
 
 	public:
 
-		StateManager() {};
-		~StateManager() {};
+		StateManager();
+		~StateManager();
 
-		void add(unique_ptr<State> toAdd, bool replace = false) {};
-		void popCurrent() {};
-		void processStateChange() {};
-		unique_ptr<State> getCurrent() {};
+		void add(unique_ptr<State> toAdd, bool replace = false);
+		void popCurrent();
+		void processStateChange();
+		unique_ptr<State>& getCurrent();
 	};
 }

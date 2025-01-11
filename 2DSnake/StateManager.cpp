@@ -51,6 +51,6 @@ void Engine::StateManager::processStateChange() {
 
 }
 
-unique_ptr<Engine::State> Engine::StateManager::getCurrent() {
-	m_stateStack.top();
+unique_ptr<Engine::State>& Engine::StateManager::getCurrent() {
+	return m_stateStack.top();
 }
