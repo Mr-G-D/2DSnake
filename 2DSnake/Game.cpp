@@ -1,7 +1,11 @@
 #include "Game.h"
+#include <SFML/Graphics.hpp>
+#include <memory>
+#include "MainMenu.h";
 
 Game::Game() : _construct(make_shared<Construct>()) {
 	_construct->renderWindow->create(sf::VideoMode({ 200, 200 }), "SFML works!");
+	_construct->state->add(make_unique<MainMenu>(_construct));
 }
 
 void Game::run() {
@@ -17,17 +21,12 @@ void Game::run() {
 		while (timeSinceLastFrame >= _timePerFrame)
 		{
 			timeSinceLastFrame -= _timePerFrame;
-			while (const optional event = _construct->renderWindow->pollEvent())
-			{
-				if (event->is<sf::Event::Closed>())
-					_construct->renderWindow->close();
-			}
 
-			_construct->renderWindow->clear();
-			_construct->renderWindow->draw(shape);
-			_construct->renderWindow->display();
+			_construct->state->processStateChange();
+			_construct->state->getCurrent()->processInput();
+			_construct->state->getCurrent()->update(_timePerFrame);
+			_construct->state->getCurrent()->draw();
 
 		}
 	}
 }
-

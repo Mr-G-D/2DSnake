@@ -5,6 +5,11 @@
 
 using namespace std;
 
+enum Fonts
+{
+	MAIN_FONT = 0,
+};
+
 struct Construct
 {
 	unique_ptr<Engine::StateManager> state;
