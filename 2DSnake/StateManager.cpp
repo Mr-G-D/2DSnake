@@ -4,7 +4,9 @@
 using namespace std;
 
 Engine::StateManager::StateManager() {
-
+	m_add = false;
+	m_remove = false;
+	m_replace = false;
 }
 
 Engine::StateManager::~StateManager() {
@@ -46,7 +48,7 @@ void Engine::StateManager::processStateChange() {
 		}
 
 		m_stateStack.push(move(m_newState));
-		m_add = true;
+		m_add = false;
 	}
 
 }

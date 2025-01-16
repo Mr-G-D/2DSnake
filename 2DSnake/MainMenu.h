@@ -11,7 +11,7 @@ class MainMenu : public Engine::State
 {
 private:
 	shared_ptr<Construct> _construct;
-	sf::Text _gameTitle(sf::String str = "placeholder");
+	sf::Text _gameTitle;
 
 public:
 	MainMenu(shared_ptr<Construct>& _construct);

@@ -22,6 +22,7 @@ struct Construct
 		asset = make_unique<Engine::AssetManager>();
 		renderWindow = make_unique<sf::RenderWindow>();
 
+
 	}
 
 };
