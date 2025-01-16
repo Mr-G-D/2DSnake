@@ -12,6 +12,13 @@ class MainMenu : public Engine::State
 private:
 	shared_ptr<Construct> _construct;
 	sf::Text _gameTitle;
+	sf::Text _playButton;
+	sf::Text _quitButton;
+
+	bool _isPlaySelected;
+	bool _isPlaypressed;
+	bool _isQuitSelected;
+	bool _isQuitPressed;
 
 public:
 	MainMenu(shared_ptr<Construct>& _construct);
