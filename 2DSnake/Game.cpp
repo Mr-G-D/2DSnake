@@ -9,8 +9,8 @@ using namespace std;
 Game::Game() : _construct(make_shared<Construct>()) {
 	try
 	{
-		_construct->renderWindow->create(sf::VideoMode({ 200, 200 }), "SFML works!");
-		_construct->asset->addFont(MAIN_FONT, "../assets/Fonts/Roboto/Roboto/text.ttf");
+		_construct->renderWindow->create(sf::VideoMode({ 500, 500 }), "SFML works!");
+		_construct->asset->addFont(MAIN_FONT, "../assets/Fonts/Press_Start_2P/PressStart2P.ttf");
 		_construct->state->add(make_unique<MainMenu>(_construct));
 
 

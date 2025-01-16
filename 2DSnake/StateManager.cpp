@@ -48,6 +48,8 @@ void Engine::StateManager::processStateChange() {
 		}
 
 		m_stateStack.push(move(m_newState));
+		m_stateStack.top()->Init();
+		m_stateStack.top()->start();
 		m_add = false;
 	}
 
