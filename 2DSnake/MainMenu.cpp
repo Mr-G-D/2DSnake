@@ -7,24 +7,20 @@ MainMenu::MainMenu(shared_ptr<Construct>& construct) : _construct(construct),
 _gameTitle(_construct->asset->getFont(MAIN_FONT), "Test"),
 _playButton(_construct->asset->getFont(MAIN_FONT), "Test"),
 _quitButton(_construct->asset->getFont(MAIN_FONT), "Test"),
+_background(_construct->temp),
 _isPlaypressed(false),
 _isPlaySelected(true),
 _isQuitPressed(false),
 _isQuitSelected(false)
-{
-	if (!_background.loadFromFile("../assets/Images/background.jpg")) {
-		cout << "Background not loaded";
-	}
-
-
-
-}
+{}
 
 MainMenu::~MainMenu()
-{
-}
+{}
 
 void MainMenu::Init() {
+
+	//BACKGROUND
+	_construct->asset->addTexture(BACKGROUND, "../assets/Images/background.jpg");
 
 	//GAME TITLE
 	_gameTitle.setFont(_construct->asset->getFont(MAIN_FONT));
@@ -114,15 +110,15 @@ void MainMenu::update(sf::Time deltaTime)
 void MainMenu::draw() {
 
 	_construct->renderWindow->clear();
-	sf::Sprite _backgroundSprite(_background);
+	_background.setTexture(_construct->asset->getTexture(BACKGROUND), true);
 
 	sf::Vector2u windowSize = _construct->renderWindow->getSize();
 
-	sf::Vector2u textureSize = _background.getSize();
+	sf::Vector2u textureSize = _construct->asset->getTexture(BACKGROUND).getSize();
 	float scaleX = static_cast<float>(windowSize.x) / static_cast<float>(textureSize.x);
 	float scaleY = static_cast<float>(windowSize.y) / static_cast<float>(textureSize.y);
-	_backgroundSprite.setScale(sf::Vector2f(scaleX, scaleY));
-	_construct->renderWindow->draw(_backgroundSprite);
+	_background.setScale(sf::Vector2f(scaleX, scaleY));
+	_construct->renderWindow->draw(_background);
 	_construct->renderWindow->draw(_gameTitle);
 	_construct->renderWindow->draw(_playButton);
 	_construct->renderWindow->draw(_quitButton);

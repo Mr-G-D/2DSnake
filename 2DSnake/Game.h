@@ -8,6 +8,7 @@ using namespace std;
 enum Fonts
 {
 	MAIN_FONT = 0,
+	BACKGROUND = 0,
 };
 
 struct Construct
@@ -15,6 +16,8 @@ struct Construct
 	unique_ptr<Engine::StateManager> state;
 	unique_ptr<Engine::AssetManager> asset;
 	unique_ptr<sf::RenderWindow> renderWindow;
+
+	sf::Texture temp;
 
 	Construct()
 	{
