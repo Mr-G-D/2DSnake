@@ -1,11 +1,23 @@
 #include "MainMenu.h"
+#include <SFML/Window/Event.hpp>
+#include <iostream>
 
 
-MainMenu::MainMenu(shared_ptr<Construct>& construct) : _construct(construct), 
-_gameTitle(_construct->asset->getFont(MAIN_FONT), "Test"), 
-_playButton(_construct->asset->getFont(MAIN_FONT), "Test"), 
-_quitButton(_construct->asset->getFont(MAIN_FONT), "Test")
+MainMenu::MainMenu(shared_ptr<Construct>& construct) : _construct(construct),
+_gameTitle(_construct->asset->getFont(MAIN_FONT), "Test"),
+_playButton(_construct->asset->getFont(MAIN_FONT), "Test"),
+_quitButton(_construct->asset->getFont(MAIN_FONT), "Test"),
+_isPlaypressed(false),
+_isPlaySelected(true),
+_isQuitPressed(false),
+_isQuitSelected(false)
 {
+	if (!_background.loadFromFile("../assets/Images/background.jpg")) {
+		cout << "Background not loaded";
+	}
+
+
+
 }
 
 MainMenu::~MainMenu()
@@ -26,6 +38,7 @@ void MainMenu::Init() {
 	_playButton.setFont(_construct->asset->getFont(MAIN_FONT));
 	_playButton.setString("Play");
 	_playButton.setOrigin(_playButton.getLocalBounds().getCenter());
+	x += 250;
 	y += 175;
 	_playButton.setPosition(sf::Vector2<float>(x, y));
 	_playButton.setCharacterSize(20);
@@ -38,14 +51,6 @@ void MainMenu::Init() {
 	_quitButton.setCharacterSize(20);
 }
 
-void MainMenu::draw() {
-
-	_construct->renderWindow->clear();
-	_construct->renderWindow->draw(_gameTitle);
-	_construct->renderWindow->draw(_playButton);
-	_construct->renderWindow->draw(_quitButton);
-	_construct->renderWindow->display();
-}
 
 
 
@@ -54,9 +59,72 @@ void MainMenu::processInput() {
 	{
 		if (event->is<sf::Event::Closed>())
 			_construct->renderWindow->close();
+		else if (event->is<sf::Event::KeyPressed>())
+		{
+			auto key = event->getIf<sf::Event::KeyPressed>();
+
+			switch (key->code)
+			{
+			case sf::Keyboard::Key::Up:
+				_isPlaySelected = !_isPlaySelected;
+				_isQuitSelected = !_isQuitSelected;
+				break;
+			case sf::Keyboard::Key::Down:
+				_isPlaySelected = !_isPlaySelected;
+				_isQuitSelected = !_isQuitSelected;
+				break;
+			case sf::Keyboard::Key::Enter:
+				if (_isPlaySelected)
+				{
+					_isPlaypressed = true;
+				}
+				else
+				{
+					_isQuitPressed = true;
+				}
+				break;
+			default:
+				break;
+			}
+		}
 	}
 }
 
+
 void MainMenu::update(sf::Time deltaTime)
 {
+	if (_isPlaySelected) {
+		_playButton.setFillColor(sf::Color::Green);
+		_quitButton.setFillColor(sf::Color::White);
+	}
+	else if (_isQuitSelected) {
+		_quitButton.setFillColor(sf::Color::Green);
+		_playButton.setFillColor(sf::Color::White);
+	}
+	if (_isPlaypressed) {
+		//
+	}
+	else if (_isQuitPressed) {
+		_construct->renderWindow->close();
+	}
+}
+
+
+
+void MainMenu::draw() {
+
+	_construct->renderWindow->clear();
+	sf::Sprite _backgroundSprite(_background);
+
+	sf::Vector2u windowSize = _construct->renderWindow->getSize();
+
+	sf::Vector2u textureSize = _background.getSize();
+	float scaleX = static_cast<float>(windowSize.x) / static_cast<float>(textureSize.x);
+	float scaleY = static_cast<float>(windowSize.y) / static_cast<float>(textureSize.y);
+	_backgroundSprite.setScale(sf::Vector2f(scaleX, scaleY));
+	_construct->renderWindow->draw(_backgroundSprite);
+	_construct->renderWindow->draw(_gameTitle);
+	_construct->renderWindow->draw(_playButton);
+	_construct->renderWindow->draw(_quitButton);
+	_construct->renderWindow->display();
 }

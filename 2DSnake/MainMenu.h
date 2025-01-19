@@ -15,6 +15,8 @@ private:
 	sf::Text _playButton;
 	sf::Text _quitButton;
 
+	sf::Texture _background;
+
 	bool _isPlaySelected;
 	bool _isPlaypressed;
 	bool _isQuitSelected;
