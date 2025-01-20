@@ -138,12 +138,14 @@
     <ClCompile Include="2DSnake.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="StateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GamePlay.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />

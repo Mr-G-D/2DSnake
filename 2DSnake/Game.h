@@ -5,10 +5,12 @@
 
 using namespace std;
 
-enum Fonts
+enum Assets
 {
-	MAIN_FONT = 0,
-	BACKGROUND = 0,
+	MAIN_FONT,
+	BACKGROUND,
+	WALL,
+	GRASS,
 };
 
 struct Construct

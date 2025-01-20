@@ -1,6 +1,7 @@
 #include "MainMenu.h"
 #include <SFML/Window/Event.hpp>
 #include <iostream>
+#include "GamePlay.h"
 
 
 MainMenu::MainMenu(shared_ptr<Construct>& construct) : _construct(construct),
@@ -98,7 +99,7 @@ void MainMenu::update(sf::Time deltaTime)
 		_playButton.setFillColor(sf::Color::White);
 	}
 	if (_isPlaypressed) {
-		//
+		_construct->state->add(make_unique<GamePlay>(_construct), true);
 	}
 	else if (_isQuitPressed) {
 		_construct->renderWindow->close();
