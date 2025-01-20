@@ -11,6 +11,7 @@ enum Assets
 	BACKGROUND,
 	WALL,
 	GRASS,
+	FOOD,
 };
 
 struct Construct

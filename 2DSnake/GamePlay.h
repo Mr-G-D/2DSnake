@@ -11,6 +11,7 @@ private:
 	sf::Texture _sample;
 
 	sf::Sprite _grass;
+	sf::Sprite _food;
 	sf::Sprite _wall1;
 	sf::Sprite _wall2;
 	sf::Sprite _wall3;
