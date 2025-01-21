@@ -20,6 +20,7 @@ void GamePlay::Init()
 	_construct->asset->addTexture(WALL, "../assets/Images/walls.png", true);
 	_construct->asset->addTexture(GRASS, "../assets/Images/grass.jpg", true);
 	_construct->asset->addTexture(FOOD, "../assets/Images/food1.png");
+	_construct->asset->addTexture(SNAKE, "../assets/Images/snake.png");
 
 	//GRASS
 	_grass.setTexture(_construct->asset->getTexture(GRASS));
@@ -55,6 +56,9 @@ void GamePlay::Init()
 	{
 		std::cout << err.what();
 	}
+
+	//SNAKE
+	_snake.init(_construct->asset->getTexture(SNAKE));
 }
 
 void GamePlay::processInput()
@@ -68,6 +72,7 @@ void GamePlay::processInput()
 
 void GamePlay::update(sf::Time deltaTime)
 {
+	_snake.move(sf::Vector2f(16, 0));
 }
 
 void GamePlay::draw()
@@ -86,6 +91,6 @@ void GamePlay::draw()
 	{
 		std::cout << err.what();
 	}
-
+	_construct->renderWindow->draw(_snake);
 	_construct->renderWindow->display();
 }

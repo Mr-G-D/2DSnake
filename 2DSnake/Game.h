@@ -12,6 +12,7 @@ enum Assets
 	WALL,
 	GRASS,
 	FOOD,
+	SNAKE,
 };
 
 struct Construct

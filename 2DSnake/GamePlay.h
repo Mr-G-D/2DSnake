@@ -3,6 +3,7 @@
 #include "SFML/Graphics.hpp"
 #include <memory>
 #include "Game.h"
+#include "Snake.h"
 
 class GamePlay : public Engine::State
 {
@@ -16,6 +17,8 @@ private:
 	sf::Sprite _wall2;
 	sf::Sprite _wall3;
 	sf::Sprite _wall4;
+	
+	Snake _snake;
 
 	std::array<sf::Sprite*, 4> _walls = { &_wall1, &_wall2, &_wall3, &_wall4 };
 
