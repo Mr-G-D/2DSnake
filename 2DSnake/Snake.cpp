@@ -1,5 +1,6 @@
 #include "Snake.h"
 #include "SFML/Graphics.hpp"
+#include <iostream>
 
 Snake::Snake() 
 {

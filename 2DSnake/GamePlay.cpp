@@ -7,7 +7,9 @@ GamePlay::GamePlay(shared_ptr<Construct> construct) :
 	_construct(construct),
 	_grass(_sample),
 	_wall1(_sample), _wall2(_sample), _wall3(_sample), _wall4(_sample),
-	_food(_sample)
+	_food(_sample),
+	_direction(16, 0),
+	_elapsedTime(sf::Time::Zero)
 {
 }
 
@@ -27,7 +29,7 @@ void GamePlay::Init()
 	_grass.setTextureRect(_construct->renderWindow->getViewport(_construct->renderWindow->getDefaultView()));
 
 	//WALL
-	for(sf::Sprite* _wall : _walls)
+	for (sf::Sprite* _wall : _walls)
 	{
 		(*_wall).setTexture(_construct->asset->getTexture(WALL));
 	}
@@ -67,12 +69,50 @@ void GamePlay::processInput()
 	{
 		if (event->is<sf::Event::Closed>())
 			_construct->renderWindow->close();
+
+		if (event->is<sf::Event::KeyPressed>()) {
+
+			const auto& key = event->getIf<sf::Event::KeyPressed>();
+			cout << event.value().getIf<sf::Event::KeyPressed>();
+			switch (key->code)
+			{
+			case sf::Keyboard::Key::Up:
+				_direction.x = 0;
+				_direction.y = -16;
+				break;
+
+			case sf::Keyboard::Key::Down:
+				_direction.x = 0;
+				_direction.y = 16;
+				break;
+
+			case sf::Keyboard::Key::Left:
+				_direction.x = -16;
+				_direction.y = 0;
+				break;
+
+			case sf::Keyboard::Key::Right:
+				_direction.x = 16;
+				_direction.y = 0;
+				break;
+
+			default:
+				break;
+			}
+
+		}
 	}
 }
 
 void GamePlay::update(sf::Time deltaTime)
 {
-	_snake.move(sf::Vector2f(16, 0));
+	_elapsedTime += deltaTime;
+
+	if (_elapsedTime.asSeconds() >= 0.1) {
+		_snake.move(_direction);
+		_elapsedTime = sf::Time::Zero;
+
+	}
 }
 
 void GamePlay::draw()

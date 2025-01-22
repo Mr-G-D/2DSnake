@@ -19,6 +19,8 @@ private:
 	sf::Sprite _wall4;
 	
 	Snake _snake;
+	sf::Vector2f _direction;
+	sf::Time _elapsedTime;
 
 	std::array<sf::Sprite*, 4> _walls = { &_wall1, &_wall2, &_wall3, &_wall4 };
 
