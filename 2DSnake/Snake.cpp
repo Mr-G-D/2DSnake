@@ -18,7 +18,7 @@ Snake::~Snake()
 
 void Snake::init(const sf::Texture& texture)
 {
-		float x = 16;
+	float x = 16;
 	for (sf::Sprite& body : _snake)
 	{
 		body.setTexture(texture);
@@ -42,11 +42,21 @@ void Snake::move(const sf::Vector2f& direction)
 
 bool Snake::collision(const sf::Sprite& collider)
 {
-	return false;
+	const sf::Rect<float>& _collider = collider.getGlobalBounds();
+	const sf::Rect<float>& _snakeHead = _head->getGlobalBounds();
+	if (_collider.findIntersection(_snakeHead)) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 void Snake::grow(sf::Vector2f& direction)
 {
+	sf::Sprite _newBody(_snake.begin()->getTexture());
+	_newBody.setPosition(_head->getPosition() + direction);
+	_snake.push_back(_newBody);
 }
 
 void Snake::draw(sf::RenderTarget& target, sf::RenderStates states) const

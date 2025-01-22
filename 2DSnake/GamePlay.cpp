@@ -73,7 +73,6 @@ void GamePlay::processInput()
 		if (event->is<sf::Event::KeyPressed>()) {
 
 			const auto& key = event->getIf<sf::Event::KeyPressed>();
-			cout << event.value().getIf<sf::Event::KeyPressed>();
 			switch (key->code)
 			{
 			case sf::Keyboard::Key::Up:
@@ -111,6 +110,11 @@ void GamePlay::update(sf::Time deltaTime)
 	if (_elapsedTime.asSeconds() >= 0.1) {
 		_snake.move(_direction);
 		_elapsedTime = sf::Time::Zero;
+
+
+		if (_snake.collision(_food)) {
+			_snake.grow(_direction);
+		}
 
 	}
 }
