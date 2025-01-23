@@ -19,6 +19,8 @@ GamePlay::~GamePlay()
 
 void GamePlay::Init()
 {
+
+	//Todo: Start snake at rest
 	_construct->asset->addTexture(WALL, "../assets/Images/walls.png", true);
 	_construct->asset->addTexture(GRASS, "../assets/Images/grass.jpg", true);
 	_construct->asset->addTexture(FOOD, "../assets/Images/food1.png");
@@ -65,6 +67,7 @@ void GamePlay::Init()
 
 void GamePlay::processInput()
 {
+	//Todo: 180 degree turn
 	while (const optional event = _construct->renderWindow->pollEvent())
 	{
 		if (event->is<sf::Event::Closed>())
@@ -114,7 +117,21 @@ void GamePlay::update(sf::Time deltaTime)
 
 		if (_snake.collision(_food)) {
 			_snake.grow(_direction);
+			//Random Food Generator
+			int x = ((rand() % 624) + 16);
+			int y = (rand() % 464) + 16;
+			// Todo: Check food postion for snake body;
+			_food.setPosition(sf::Vector2f((x < 624) ? x : x % 624, (y < 464) ? y : y % 464)); 
 		}
+		for (auto& wall : _walls)
+		{
+			if (_snake.collision(*wall)) {
+				cout << "GameOver" << endl;
+				//Todo: GameOver State
+			}
+		}
+		//Todo: Game Over module
+		//Todo: Game Pause Module
 
 	}
 }
