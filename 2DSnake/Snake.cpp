@@ -30,6 +30,7 @@ void Snake::init(const sf::Texture& texture)
 
 void Snake::move(const sf::Vector2f& direction)
 {
+	
 	_tail->setPosition(_head->getPosition() + direction);
 	_head = _tail;
 	++_tail;

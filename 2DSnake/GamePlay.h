@@ -17,12 +17,17 @@ private:
 	sf::Sprite _wall2;
 	sf::Sprite _wall3;
 	sf::Sprite _wall4;
+
+	sf::Text _pauseText;
+	sf::RectangleShape _pauseScreen;
 	
 	Snake _snake;
 	sf::Vector2f _direction;
 	sf::Time _elapsedTime;
 
 	std::array<sf::Sprite*, 4> _walls = { &_wall1, &_wall2, &_wall3, &_wall4 };
+
+	bool _ispaused = false;
 
 public:
 	GamePlay(shared_ptr<Construct> construct);
@@ -34,7 +39,11 @@ public:
 
 	void update(sf::Time deltaTime) override;
 
+	void changeDirection(const float& x, const float& y);
+
 	void draw() override;
+
+	void pause() override;
 
 };
 
