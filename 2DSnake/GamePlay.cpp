@@ -10,7 +10,7 @@ GamePlay::GamePlay(shared_ptr<Construct> construct) :
 	_grass(_sample),
 	_wall1(_sample), _wall2(_sample), _wall3(_sample), _wall4(_sample),
 	_food(_sample),
-	_direction(16, 0),
+	_direction(0, 0),
 	_elapsedTime(sf::Time::Zero),
 	_pauseText(_construct->asset->getFont(MAIN_FONT), "PAUSED")
 {
@@ -23,7 +23,6 @@ GamePlay::~GamePlay()
 void GamePlay::Init()
 {
 
-	//Todo: Start snake at rest
 	_construct->asset->addTexture(WALL, "../assets/Images/walls.png", true);
 	_construct->asset->addTexture(GRASS, "../assets/Images/grass.jpg", true);
 	_construct->asset->addTexture(FOOD, "../assets/Images/food1.png");
