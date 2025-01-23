@@ -4,7 +4,7 @@
 #include "GamePlay.h"
 
 
-MainMenu::MainMenu(shared_ptr<Construct>& construct) : _construct(construct),
+MainMenu::MainMenu(shared_ptr<Construct>& construct, bool isMainMenu) : _construct(construct),
 _gameTitle(_construct->asset->getFont(MAIN_FONT), "Test"),
 _playButton(_construct->asset->getFont(MAIN_FONT), "Test"),
 _quitButton(_construct->asset->getFont(MAIN_FONT), "Test"),
@@ -13,7 +13,9 @@ _isPlaypressed(false),
 _isPlaySelected(true),
 _isQuitPressed(false),
 _isQuitSelected(false)
-{}
+{
+	_isMainMenu = isMainMenu;
+}
 
 MainMenu::~MainMenu()
 {}
@@ -25,7 +27,7 @@ void MainMenu::Init() {
 
 	//GAME TITLE
 	_gameTitle.setFont(_construct->asset->getFont(MAIN_FONT));
-	_gameTitle.setString("2D Snake Game");
+	_gameTitle.setString(_isMainMenu == true ? "2D Snake Game" : "Game over");
 	_gameTitle.setOrigin(_gameTitle.getLocalBounds().getCenter());
 	int x = _construct->renderWindow->getSize().x / 2.0;
 	int y = (_construct->renderWindow->getSize().y / 2.0) - 150;
@@ -33,7 +35,7 @@ void MainMenu::Init() {
 
 	//PLAY BUTTON
 	_playButton.setFont(_construct->asset->getFont(MAIN_FONT));
-	_playButton.setString("Play");
+	_playButton.setString(_isMainMenu == true ? "Play" : "Retry");
 	_playButton.setOrigin(_playButton.getLocalBounds().getCenter());
 	x += 250;
 	y += 175;

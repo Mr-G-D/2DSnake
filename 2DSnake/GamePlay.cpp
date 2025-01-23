@@ -1,6 +1,8 @@
 #include "GamePlay.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "MainMenu.h"
+#include <memory>
 
 
 GamePlay::GamePlay(shared_ptr<Construct> construct) :
@@ -126,11 +128,9 @@ void GamePlay::update(sf::Time deltaTime)
 		for (auto& wall : _walls)
 		{
 			if (_snake.collision(*wall)) {
-				cout << "GameOver" << endl;
-				//Todo: GameOver State
+				_construct->state->add(make_unique<MainMenu>(_construct, false));
 			}
 		}
-		//Todo: Game Over module
 		//Todo: Game Pause Module
 
 	}

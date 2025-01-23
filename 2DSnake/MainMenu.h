@@ -22,8 +22,10 @@ private:
 	bool _isQuitSelected;
 	bool _isQuitPressed;
 
+	bool _isMainMenu = true;
+
 public:
-	MainMenu(shared_ptr<Construct>& _construct);
+	MainMenu(shared_ptr<Construct>& _construct, bool isMainMenu);
 	~MainMenu();
 
 	void Init();
