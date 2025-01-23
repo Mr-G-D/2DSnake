@@ -27,7 +27,8 @@ private:
 
 	std::array<sf::Sprite*, 4> _walls = { &_wall1, &_wall2, &_wall3, &_wall4 };
 
-	bool _ispaused = false;
+	bool _ispaused;
+	bool _game;
 
 public:
 	GamePlay(shared_ptr<Construct> construct);
@@ -42,6 +43,7 @@ public:
 	void changeDirection(const float& x, const float& y);
 
 	void draw() override;
+
 
 	void pause() override;
 

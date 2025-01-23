@@ -10,10 +10,12 @@ GamePlay::GamePlay(shared_ptr<Construct> construct) :
 	_grass(_sample),
 	_wall1(_sample), _wall2(_sample), _wall3(_sample), _wall4(_sample),
 	_food(_sample),
-	_direction(0, 0),
+	_direction(16, 0),
 	_elapsedTime(sf::Time::Zero),
 	_pauseText(_construct->asset->getFont(MAIN_FONT), "PAUSED")
 {
+	_ispaused = false;
+	_game = false;
 }
 
 GamePlay::~GamePlay()
@@ -123,7 +125,7 @@ void GamePlay::update(sf::Time deltaTime)
 	_elapsedTime += deltaTime;
 
 	if (_elapsedTime.asSeconds() >= 0.1) {
-		if(!_ispaused)
+		if(!_ispaused && _game)
 			_snake.move(_direction);
 		_elapsedTime = sf::Time::Zero;
 
@@ -151,8 +153,14 @@ void GamePlay::changeDirection(const float& x, const float& y)
 {
 	if (!_ispaused)
 	{
-		_direction.x = x;
-		_direction.y = y;
+		if (!_game) {
+			_game = true;
+		}
+		if (std::abs(_direction.x) != std::abs(x) || std::abs(_direction.y) != std::abs(y))
+		{
+			_direction.x = x;
+			_direction.y = y;
+		}
 	}
 }
 
